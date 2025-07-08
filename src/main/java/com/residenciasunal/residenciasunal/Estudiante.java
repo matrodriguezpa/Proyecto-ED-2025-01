@@ -6,12 +6,14 @@ public class Estudiante {
     private String nombre;
     private String carrera;
     private long puntaje;
+    private boolean asignado;
 
     public Estudiante(String id, String nombre, String carrera, long puntaje) {
         this.id = id;
         this.nombre = nombre;
         this.carrera = carrera;
         this.puntaje = puntaje;
+        this.asignado = false;
     }
 
     public String getId() {
@@ -29,6 +31,10 @@ public class Estudiante {
     public long getPuntaje() {
         return puntaje;
     }
+    
+    public boolean getAsignado(){
+        return asignado;
+    }
 
     // Setters
     public void setNombre(String nombre) {
@@ -43,6 +49,10 @@ public class Estudiante {
         this.puntaje = puntaje;
     }
 
+    public void setAsignado(boolean asignado){
+        this.asignado = asignado;
+    }
+    
     @Override
     public String toString() {
         return "Estudiante{"
