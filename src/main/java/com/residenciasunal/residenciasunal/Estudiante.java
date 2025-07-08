@@ -1,13 +1,55 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.residenciasunal.residenciasunal;
 
-/**
- *
- * @author Usuario
- */
 public class Estudiante {
-    
+
+    private final String id;
+    private String nombre;
+    private String carrera;
+    private long puntaje;
+
+    public Estudiante(String id, String nombre, String carrera, long puntaje) {
+        this.id = id;
+        this.nombre = nombre;
+        this.carrera = carrera;
+        this.puntaje = puntaje;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public long getPuntaje() {
+        return puntaje;
+    }
+
+    // Setters
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+
+    public void setPuntaje(long puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante{"
+                + "id='" + id + '\''
+                + ", nombre='" + nombre + '\''
+                + ", carrera='" + carrera + '\''
+                + ", puntaje=" + puntaje
+                + '}';
+    }
 }
