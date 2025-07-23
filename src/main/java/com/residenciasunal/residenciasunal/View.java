@@ -4,6 +4,8 @@
  */
 package com.residenciasunal.residenciasunal;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -188,19 +190,67 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
-        // TODO add your handling code here:
-        String Cedula = TextoCedula.getText();
-        String Nombre = TextoNombre.getText();
-        String Carrera = TextoCarrera.getText();
-        Long Puntaje = Long.valueOf(TextoPuntaje.getText());
+        // Leer datos de los campos
+        String cedulaStr = TextoCedula.getText().trim();
+        String nombre = TextoNombre.getText().trim();
+        String carrera = TextoCarrera.getText().trim();
+        String puntajeStr = TextoPuntaje.getText().trim();
 
-        //comprobar que no este ya agregado
-        if (mapEstudiantes.containsKey(Cedula)) {
-            Estudiante estudianteAgregado = new Estudiante(Integer.parseInt(Cedula), Nombre, Carrera, Puntaje);
-            mapEstudiantes.put(Cedula, estudianteAgregado);
-            heapEstudiantes.insert(estudianteAgregado);
+        // Validar campos no vacíos
+        if (cedulaStr.isEmpty() || nombre.isEmpty() || carrera.isEmpty() || puntajeStr.isEmpty()) {
+            System.err.println("Algún campo está vacío.");
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Todos los campos son obligatorios.",
+                    "Error de validación",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // Parseo del puntaje
+        Long puntaje;
+        try {
+            puntaje = Long.valueOf(puntajeStr);
+        } catch (NumberFormatException ex) {
+            System.err.println("Formato de puntaje inválido: " + puntajeStr);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El puntaje debe ser un número entero.",
+                    "Error de formato",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // Verificar que la cédula NO esté ya en el mapa
+        if (!mapEstudiantes.containsKey(cedulaStr)) {
+            // Crear y agregar el estudiante
+            Estudiante est = new Estudiante(Integer.parseInt(cedulaStr), nombre, carrera, puntaje);
+            mapEstudiantes.put(cedulaStr, est);
+            heapEstudiantes.insert(est);
+
+            System.out.println("Estudiante agregado: " + est);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Estudiante agregado correctamente.",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            // Limpiar campos
+            TextoCedula.setText("");
+            TextoNombre.setText("");
+            TextoCarrera.setText("");
+            TextoPuntaje.setText("");
         } else {
-            //Ventana de error
+            System.err.println("Ya existe un estudiante con cédula: " + cedulaStr);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "La cédula “" + cedulaStr + "” ya está registrada.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }//GEN-LAST:event_BotonAgregarActionPerformed
 
@@ -209,12 +259,44 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_TextoCedulaActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
-        String Cedula = TextoCedula.getText();
+        String cedulaStr = TextoCedula.getText().trim();
 
-        if (mapEstudiantes.containsKey(Cedula)) {
-            mapEstudiantes.remove(Cedula);
+        // Validar campo
+        if (cedulaStr.isEmpty()) {
+            System.err.println("Cédula vacía en eliminación.");
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Debe ingresar la cédula del estudiante a eliminar.",
+                    "Error de validación",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // Verificar existencia y eliminar
+        if (mapEstudiantes.containsKey(cedulaStr)) {
+            Estudiante eliminado = mapEstudiantes.remove(cedulaStr);
+            // (Opcional) también podrías retirar de heapEstudiantes si tu estructura lo permite:
+            // heapEstudiantes.remove(eliminado);
+
+            System.out.println("Estudiante eliminado: " + eliminado);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Estudiante eliminado con éxito.",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            // Limpiar campo
+            TextoCedula.setText("");
         } else {
-            //Ventana de error.
+            System.err.println("No existe estudiante con cédula: " + cedulaStr);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "No se encontró ningún estudiante con cédula “" + cedulaStr + "”.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
