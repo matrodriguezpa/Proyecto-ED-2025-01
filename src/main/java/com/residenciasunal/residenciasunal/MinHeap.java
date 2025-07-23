@@ -100,4 +100,12 @@ public class MinHeap {
             System.out.println(e);
         }
     }
+    
+    public MinHeap clone() {
+        MinHeap clonedHeap = new MinHeap();
+        for (Estudiante estudiante : this.heap) {
+            clonedHeap.heap.add(estudiante.clone()); // assumes Estudiante implements clone()
+        }
+        return clonedHeap;
+    }
 }
