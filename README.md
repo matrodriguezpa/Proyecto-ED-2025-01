@@ -4,7 +4,7 @@ Este proyecto implementa un sistema de asignación de cupos para residencias uni
 
 ---
 
-# Objetivo del Proyecto
+## 🎯 Objetivo del Proyecto
 
 Automatizar el proceso de asignación de residencias para estudiantes de la Universidad Nacional, garantizando eficiencia y equidad mediante estructuras de datos eficientes.
 
@@ -12,15 +12,47 @@ Cada estudiante tiene un puntaje socioeconómico: cuanto menor es el puntaje, ma
 
 ---
 
-# Estructuras de Datos Utilizadas
+## ⚙️ Estructuras de Datos Utilizadas
 
-- HashMap (Diccionario): Para acceder a la información de los estudiantes mediante su ID de forma rápida.
-- Heap Mínimo (Priority Queue): Para ordenar a los estudiantes por prioridad y asignar los cupos de forma eficiente.
-- Listas/Arreglos: Para separar y mostrar los estudiantes que obtuvieron y no obtuvieron cupo.
+- HashMap (HashMap): Para acceder a la información de los estudiantes mediante su ID de forma rápida.
+- Heap Mínimo (MinHeap): Para ordenar a los estudiantes por prioridad y asignar los cupos de forma eficiente.
+- Lista enlazada (LinkedList): Para separar y mostrar los estudiantes que obtuvieron y no obtuvieron cupo.
 
 ---
 
-# Funcionalidades Principales
+## 🧠 Arquitectura y Componentes
+
+### 1. `Estudiante.java`
+Define la entidad principal con atributos:
+- `id(cedula)` (int)
+- `nombre` (String)
+- `carrera` (String)
+- `puntaje` (long)
+
+### 2. `MinHeap.java`
+Implementación de un heap binario mínimo para priorizar estudiantes según su puntaje.  
+Contiene métodos como:
+- `insert()`, `extractMin()`, `actualizarPuntaje()`
+
+### 3. `HashMap.java`
+Tabla hash con manejo de colisiones por encadenamiento, permite:
+- `agregar`, `eliminar`, `buscar por ID`, `actualizar`, `reordenar`.
+
+### 4. `View.java` & `View.form`
+Vista principal de la aplicación, desarrollada con jSwing GUI Builder de NetBeans.  
+Incluye menú y paneles dinámicos para la lógica de interacción.
+
+### 5. `PanelEstudiante.java` & `PanelEstudiante.form`
+Panel reutilizable que representa visualmente a un estudiante, mostrando:
+- Nombre
+- Carrera
+- Puntaje
+- Indicador si fue asignado o no
+
+
+---
+
+## 🖱️ Funcionalidades Principales
 
 - Registro de estudiantes con ID, nombre completo y puntaje.
 - Ingreso de número de cupos disponibles.
@@ -33,41 +65,59 @@ Cada estudiante tiene un puntaje socioeconómico: cuanto menor es el puntaje, ma
 
 ---
 
-# Estado del Proyecto
+## 🧪 Estado del Proyecto
 
-- Primer entregable (En desarrollo)
-
----
-
-#  Estructura del Repositorio
-
-- (En desarrollo)
+- Primer entregable (Completado)
+- Entrega final (Completado)
+    - ✅ Implementación completa de estructuras de datos
+    - ✅ Interfaz funcional con formularios jSwing 
+    - ✅ Pruebas locales de flujo completo 
 
 ---
 
-# Autores
+## 📁 Estructura del Repositorio
 
-- Santiago Neuta
-- Mateo Rodríguez Palacios
+├── src/
+│ ├── Estudiante.java
+│ ├── HashMap.java
+│ ├── LinkedList.java
+│ ├── MinHeap.Java
+│ ├── View.java
+│ ├── View.form
+│ ├── PanelEstudiante.java
+│ ├── PanelEstudiante.form
+│ └── ResidenciasUnal.java
+├── README.md
+├── .gitignore
+└── pom.xml
 
 ---
 
-## Tecnologías Utilizadas
+## 👨‍💻 Autores
+
+- Santiago Neuta – Estudiante de Ingeniería de Sistemas
+- Mateo Rodríguez Palacios – Estudiante de Ingeniería de Sistemas
+
+---
+
+## 💻 Tecnologías Utilizadas
 
 - JAVA (Lenguaje en el que desarrolla el sistema)
+- jSwing (Java GUI)
 - Git y GitHub (Control de versiones y desarrollo colaborativo)
 - Visual Studio Code (Entorno de desarrollo)
+- NetBeans (Entorno de desarrollo)
 - OnlineGDB (Entorno de pruebas rapidas en linea)
 
 ---
 
-# Licencia
+## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Puedes usar, modificar y distribuir este software libremente, siempre que se mencione a los autores originales.
 
 ---
 
-# Contribuciones
+## 📬 Contribuciones
 
 Este proyecto es parte de una actividad académica y no está abierto a contribuciones externas. Si deseas compartir ideas o comentarios, ¡Bienvenido seas a contactarnos!
 
