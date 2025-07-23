@@ -23,7 +23,46 @@ public class View extends javax.swing.JFrame {
         mapEstudiantes = new HashMap();
         heapEstudiantes = new MinHeap();
     }
+    
+    private boolean validarCampos(String cedulaStr, String nombre, String carrera, String puntajeStr) {
+        if (cedulaStr.isEmpty() || nombre.isEmpty() || carrera.isEmpty() || puntajeStr.isEmpty()) {
+            String msg = "Todos los campos son obligatorios.";
+            System.err.println(msg);
+            JOptionPane.showMessageDialog(this, msg, "Error de validacion", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 
+    /**
+     * Intenta parsear una cédula a entero, muestra mensaje si falla
+     * @return valor entero de la cédula, o -1 si falla
+     */
+    private int parsearCedula(String cedulaStr) {
+        try {
+            return Integer.parseInt(cedulaStr);
+        } catch (NumberFormatException ex) {
+            String msg = "La cedula debe ser un numero entero.";
+            System.err.println(msg + " Valor recibido: " + cedulaStr);
+            JOptionPane.showMessageDialog(this, msg, "Error de formato", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
+
+    /**
+     * Intenta parsear un puntaje a long, muestra mensaje si falla
+     * @return valor long del puntaje, o -1 si falla
+     */
+    private long parsearPuntaje(String puntajeStr) {
+        try {
+            return Long.parseLong(puntajeStr);
+        } catch (NumberFormatException ex) {
+            String msg = "El puntaje debe ser un número entero.";
+            System.err.println(msg + " Valor recibido: " + puntajeStr);
+            JOptionPane.showMessageDialog(this, msg, "Error de formato", JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,8 +75,9 @@ public class View extends javax.swing.JFrame {
         PanelBusqueda = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         TituloBuscar = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        TextoBusqueda = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        BotonEliminar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
         PanelPrioridad = new javax.swing.JPanel();
@@ -50,9 +90,9 @@ public class View extends javax.swing.JFrame {
         TextoPuntaje = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         BotonAgregar = new javax.swing.JButton();
-        BotonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1200, 600));
 
         PanelBusqueda.setBackground(java.awt.Color.white);
         PanelBusqueda.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
@@ -60,23 +100,37 @@ public class View extends javax.swing.JFrame {
 
         jPanel5.setBackground(java.awt.Color.white);
         jPanel5.setMaximumSize(new java.awt.Dimension(500, 100));
+        jPanel5.setMinimumSize(new java.awt.Dimension(500, 200));
+        jPanel5.setPreferredSize(new java.awt.Dimension(343, 70));
 
         TituloBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloBuscar.setText("Buscar por cédula:");
         jPanel5.add(TituloBuscar);
 
-        jTextField7.setMaximumSize(new java.awt.Dimension(90, 30));
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        TextoBusqueda.setMaximumSize(new java.awt.Dimension(70, 26));
+        TextoBusqueda.setMinimumSize(new java.awt.Dimension(70, 26));
+        TextoBusqueda.setPreferredSize(new java.awt.Dimension(130, 26));
+        TextoBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                TextoBusquedaActionPerformed(evt);
             }
         });
-        jPanel5.add(jTextField7);
+        jPanel5.add(TextoBusqueda);
 
         jButton3.setBackground(java.awt.Color.lightGray);
         jButton3.setForeground(java.awt.Color.white);
         jButton3.setText("Asignar");
         jPanel5.add(jButton3);
+
+        BotonEliminar.setBackground(java.awt.Color.red);
+        BotonEliminar.setForeground(java.awt.Color.white);
+        BotonEliminar.setText("Eliminar");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(BotonEliminar);
 
         PanelBusqueda.add(jPanel5);
         PanelBusqueda.add(jPanel6);
@@ -156,16 +210,6 @@ public class View extends javax.swing.JFrame {
         });
         jPanel4.add(BotonAgregar);
 
-        BotonEliminar.setBackground(java.awt.Color.red);
-        BotonEliminar.setForeground(java.awt.Color.white);
-        BotonEliminar.setText("Eliminar");
-        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonEliminarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(BotonEliminar);
-
         PanelInformacion.add(jPanel4);
 
         getContentPane().add(PanelInformacion, java.awt.BorderLayout.WEST);
@@ -185,72 +229,47 @@ public class View extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextoPuntajeActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void TextoBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoBusquedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_TextoBusquedaActionPerformed
 
     private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
-        // Leer datos de los campos
         String cedulaStr = TextoCedula.getText().trim();
         String nombre = TextoNombre.getText().trim();
         String carrera = TextoCarrera.getText().trim();
         String puntajeStr = TextoPuntaje.getText().trim();
 
-        // Validar campos no vacíos
-        if (cedulaStr.isEmpty() || nombre.isEmpty() || carrera.isEmpty() || puntajeStr.isEmpty()) {
-            System.err.println("Algún campo está vacío.");
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Todos los campos son obligatorios.",
-                    "Error de validación",
-                    JOptionPane.ERROR_MESSAGE
-            );
+        // Validación centralizada
+        if (!validarCampos(cedulaStr, nombre, carrera, puntajeStr)) {
             return;
         }
 
-        // Parseo del puntaje
-        Long puntaje;
-        try {
-            puntaje = Long.valueOf(puntajeStr);
-        } catch (NumberFormatException ex) {
-            System.err.println("Formato de puntaje inválido: " + puntajeStr);
-            JOptionPane.showMessageDialog(
-                    this,
-                    "El puntaje debe ser un número entero.",
-                    "Error de formato",
-                    JOptionPane.ERROR_MESSAGE
-            );
+        int cedula = parsearCedula(cedulaStr);
+        if (cedula < 0) {
             return;
         }
 
-        // Verificar que la cédula NO esté ya en el mapa
+        long puntaje = parsearPuntaje(puntajeStr);
+        if (puntaje < 0) {
+            return;
+        }
+
         if (!mapEstudiantes.containsKey(cedulaStr)) {
-            // Crear y agregar el estudiante
-            Estudiante est = new Estudiante(Integer.parseInt(cedulaStr), nombre, carrera, puntaje);
+            Estudiante est = new Estudiante(cedula, nombre, carrera, puntaje);
             mapEstudiantes.put(cedulaStr, est);
             heapEstudiantes.insert(est);
 
             System.out.println("Estudiante agregado: " + est);
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Estudiante agregado correctamente.",
-                    "Éxito",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.", "Exito", JOptionPane.INFORMATION_MESSAGE);
 
-            // Limpiar campos
             TextoCedula.setText("");
             TextoNombre.setText("");
             TextoCarrera.setText("");
             TextoPuntaje.setText("");
         } else {
-            System.err.println("Ya existe un estudiante con cédula: " + cedulaStr);
-            JOptionPane.showMessageDialog(
-                    this,
-                    "La cédula “" + cedulaStr + "” ya está registrada.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            String msg = "La cedula “" + cedulaStr + "” ya está registrada.";
+            System.err.println(msg);
+            JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonAgregarActionPerformed
 
@@ -259,44 +278,27 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_TextoCedulaActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
-        String cedulaStr = TextoCedula.getText().trim();
+        String cedulaStr = TextoBusqueda.getText().trim();
 
-        // Validar campo
         if (cedulaStr.isEmpty()) {
-            System.err.println("Cédula vacía en eliminación.");
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Debe ingresar la cédula del estudiante a eliminar.",
-                    "Error de validación",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            String msg = "Debe ingresar la cedula del estudiante a eliminar.";
+            System.err.println(msg);
+            JOptionPane.showMessageDialog(this, msg, "Error de validacion", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Verificar existencia y eliminar
         if (mapEstudiantes.containsKey(cedulaStr)) {
             Estudiante eliminado = mapEstudiantes.remove(cedulaStr);
-            // (Opcional) también podrías retirar de heapEstudiantes si tu estructura lo permite:
             // heapEstudiantes.remove(eliminado);
 
             System.out.println("Estudiante eliminado: " + eliminado);
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Estudiante eliminado con éxito.",
-                    "Éxito",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this, "Estudiante eliminado con exito.", "Exito", JOptionPane.INFORMATION_MESSAGE);
 
-            // Limpiar campo
             TextoCedula.setText("");
         } else {
-            System.err.println("No existe estudiante con cédula: " + cedulaStr);
-            JOptionPane.showMessageDialog(
-                    this,
-                    "No se encontró ningún estudiante con cédula “" + cedulaStr + "”.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            String msg = "No se encontro ningun estudiante con cedula “" + cedulaStr + "”.";
+            System.err.println(msg);
+            JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
@@ -341,6 +343,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBusqueda;
     private javax.swing.JPanel PanelInformacion;
     private javax.swing.JPanel PanelPrioridad;
+    public javax.swing.JTextField TextoBusqueda;
     public javax.swing.JTextField TextoCarrera;
     public javax.swing.JTextField TextoCedula;
     public javax.swing.JTextField TextoNombre;
@@ -353,6 +356,5 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    public javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }
