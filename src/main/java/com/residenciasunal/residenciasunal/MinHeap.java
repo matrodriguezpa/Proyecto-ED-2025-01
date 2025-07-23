@@ -2,11 +2,11 @@ package com.residenciasunal.residenciasunal;
 
 import java.util.ArrayList;
 
-public class MinHeapEstudiantes {
+public class MinHeap {
 
     private ArrayList<Estudiante> heap;
 
-    public MinHeapEstudiantes() {
+    public MinHeap() {
         heap = new ArrayList<>();
     }
 
@@ -46,9 +46,9 @@ public class MinHeapEstudiantes {
         return min;
     }
 
-    public void actualizarPuntaje(String id, long nuevoPuntaje) {
+    public void actualizarPuntaje(int id, long nuevoPuntaje) {
         for (int i = 0; i < heap.size(); i++) {
-            if (heap.get(i).getId().equals(id)) {
+            if (heap.get(i).getCedula() == id) {
                 heap.get(i).setPuntaje(nuevoPuntaje);
                 heapifyUp(i);
                 heapifyDown(i);

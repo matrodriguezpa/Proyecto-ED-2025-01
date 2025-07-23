@@ -2,22 +2,22 @@ package com.residenciasunal.residenciasunal;
 
 public class Estudiante {
 
-    private final String id;
+    private int cedula;
     private String nombre;
     private String carrera;
     private long puntaje;
     private boolean asignado;
 
-    public Estudiante(String id, String nombre, String carrera, long puntaje) {
-        this.id = id;
+    public Estudiante(int cedula, String nombre, String carrera, long puntaje) {
+        this.cedula = cedula;
         this.nombre = nombre;
         this.carrera = carrera;
         this.puntaje = puntaje;
         this.asignado = false;
     }
 
-    public String getId() {
-        return id;
+    public int getCedula() {
+        return cedula;
     }
 
     public String getNombre() {
@@ -36,6 +36,10 @@ public class Estudiante {
         return asignado;
     }
 
+    public void setCedula(int cedula){
+        this.cedula = cedula;
+    }
+    
     // Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -56,7 +60,7 @@ public class Estudiante {
     @Override
     public String toString() {
         return "Estudiante{"
-                + "id='" + id + '\''
+                + "cedula='" + cedula + '\''
                 + ", nombre='" + nombre + '\''
                 + ", carrera='" + carrera + '\''
                 + ", puntaje=" + puntaje
