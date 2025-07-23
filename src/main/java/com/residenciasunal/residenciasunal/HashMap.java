@@ -27,6 +27,9 @@ public class HashMap {
 
     //Inserta o actualiza un estudiante en el mapa.
     public void put(String key, Estudiante value) {
+        if (key == null) {
+            throw new IllegalArgumentException("La clave no puede ser null");
+        }
         int index = indexFor(hash(key), buckets.length);
         Entry current = buckets[index];
 
@@ -52,6 +55,9 @@ public class HashMap {
 
     // Obtiene un estudiante por ID, o null si no existe.
     public Estudiante get(String key) {
+        if (key == null) {
+            throw new IllegalArgumentException("La clave no puede ser null");
+        }
         int index = indexFor(hash(key), buckets.length);
         Entry current = buckets[index];
 
@@ -67,6 +73,9 @@ public class HashMap {
     //Elimina el estudiante con la clave dada y lo devuelve, o null si no existía.
      
     public Estudiante remove(String key) {
+        if (key == null) {
+            throw new IllegalArgumentException("La clave no puede ser null");
+        }
         int index = indexFor(hash(key), buckets.length);
         Entry prev = null;
         Entry current = buckets[index];
