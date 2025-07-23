@@ -83,8 +83,8 @@ public class View extends javax.swing.JFrame {
         PanelBusqueda.setLayout(new javax.swing.BoxLayout(PanelBusqueda, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel5.setBackground(java.awt.Color.white);
-        jPanel5.setMaximumSize(new java.awt.Dimension(500, 100));
-        jPanel5.setMinimumSize(new java.awt.Dimension(500, 200));
+        jPanel5.setMaximumSize(new java.awt.Dimension(500, 70));
+        jPanel5.setMinimumSize(new java.awt.Dimension(500, 70));
         jPanel5.setPreferredSize(new java.awt.Dimension(343, 70));
 
         TituloBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -123,7 +123,10 @@ public class View extends javax.swing.JFrame {
 
         PanelBusqueda.add(jPanel5);
 
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.Y_AXIS));
+        jPanel6.setBackground(java.awt.Color.white);
+        jPanel6.setMaximumSize(new java.awt.Dimension(250, 32767));
+        jPanel6.setMinimumSize(new java.awt.Dimension(250, 32767));
+        jPanel6.setPreferredSize(new java.awt.Dimension(250, 32767));
         PanelBusqueda.add(jPanel6);
 
         getContentPane().add(PanelBusqueda, java.awt.BorderLayout.CENTER);
@@ -134,15 +137,15 @@ public class View extends javax.swing.JFrame {
 
         PanelPrioridad.setBackground(java.awt.Color.white);
         PanelPrioridad.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        PanelPrioridad.setMaximumSize(new java.awt.Dimension(200, 120));
-        PanelPrioridad.setMinimumSize(new java.awt.Dimension(200, 120));
-        PanelPrioridad.setPreferredSize(new java.awt.Dimension(200, 120));
-        PanelPrioridad.setLayout(new javax.swing.BoxLayout(PanelPrioridad, javax.swing.BoxLayout.Y_AXIS));
+        PanelPrioridad.setMaximumSize(new java.awt.Dimension(250, 120));
+        PanelPrioridad.setMinimumSize(new java.awt.Dimension(250, 120));
+        PanelPrioridad.setPreferredSize(new java.awt.Dimension(250, 120));
+        PanelPrioridad.setLayout(new javax.swing.BoxLayout(PanelPrioridad, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel1.setBackground(java.awt.Color.white);
         jPanel1.setMaximumSize(new java.awt.Dimension(200, 40));
         jPanel1.setMinimumSize(new java.awt.Dimension(200, 40));
-        jPanel1.setPreferredSize(new java.awt.Dimension(200, 70));
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 40));
 
         TituloCupos.setText("Cupos");
         jPanel1.add(TituloCupos);
@@ -179,7 +182,9 @@ public class View extends javax.swing.JFrame {
         TituloPrioridad.setAlignmentX(0.5F);
         PanelPrioridad.add(TituloPrioridad);
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+        jPanel2.setBackground(java.awt.Color.white);
+        jPanel2.setMinimumSize(new java.awt.Dimension(32767, 32767));
+        jPanel2.setPreferredSize(new java.awt.Dimension(32767, 32767));
         PanelPrioridad.add(jPanel2);
 
         getContentPane().add(PanelPrioridad, java.awt.BorderLayout.EAST);
@@ -381,7 +386,6 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonBuscarActionPerformed
 
     private void BotonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAsignarActionPerformed
-
         // Leer cantidad de cupos
         String cuposStr = TextoCupos.getText() != null ? TextoCupos.getText().trim() : "";
         int cupos;
@@ -391,7 +395,7 @@ public class View extends javax.swing.JFrame {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException ex) {
-            String msg = "Ingrese un número válido de cupos (>0).";
+            String msg = "Ingrese un número válido de cupos.";
             System.err.println(msg + " Valor recibido: " + cuposStr);
             JOptionPane.showMessageDialog(this, msg, "Error de formato", JOptionPane.ERROR_MESSAGE);
             return;
@@ -465,9 +469,7 @@ public class View extends javax.swing.JFrame {
             PanelEstudiante panel = new PanelEstudiante();
             panel.getCedula().setText(String.valueOf(est.getCedula()));
             panel.getNombre().setText(est.getNombre());
-            panel.getCarrera().setText(est.getCarrera());
             panel.getPuntaje().setText(Long.toString(est.getPuntaje()));
-            panel.getAsignado().setText(est.getAsignado() ? "Cupo asignado" : "Cupo no asignado");
 
             jPanel2.add(panel);
         }

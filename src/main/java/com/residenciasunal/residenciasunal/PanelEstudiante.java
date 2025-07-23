@@ -34,6 +34,10 @@ public class PanelEstudiante extends javax.swing.JPanel {
         Puntaje = new javax.swing.JLabel();
         Asignado = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(400, 40));
+        setMinimumSize(new java.awt.Dimension(400, 40));
+        setPreferredSize(new java.awt.Dimension(400, 40));
+
         Cedula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Cedula.setText("Cédula");
         add(Cedula);
