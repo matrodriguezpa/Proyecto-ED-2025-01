@@ -120,6 +120,7 @@ Panel reutilizable que representa visualmente a un estudiante, mostrando:
 - Visual Studio Code (Entorno de desarrollo)
 - NetBeans (Entorno de desarrollo)
 - OnlineGDB (Entorno de pruebas rapidas en linea)
+- Maven (Gestor de proyectos)
 
 ---
 

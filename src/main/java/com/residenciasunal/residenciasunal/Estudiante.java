@@ -35,12 +35,16 @@ public class Estudiante {
     public boolean getAsignado(){
         return asignado;
     }
-
-    public void setCedula(int cedula){
-        this.cedula = cedula;
-    }
     
     // Setters
+    public void setCedula(int cedula) {
+        if (cedula < 0) {
+            throw new IllegalArgumentException("La cédula no puede ser un número negativo.");
+        }
+        this.cedula = cedula;
+    }
+
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -50,6 +54,9 @@ public class Estudiante {
     }
 
     public void setPuntaje(long puntaje) {
+        if (puntaje < 0) {
+            throw new IllegalArgumentException("El puntaje no puede ser negativo.");
+        }
         this.puntaje = puntaje;
     }
 
