@@ -47,15 +47,20 @@ public class MinHeap {
     }
 
     public void actualizarPuntaje(int id, long nuevoPuntaje) {
-        for (int i = 0; i < heap.size(); i++) {
-            if (heap.get(i).getCedula() == id) {
-                heap.get(i).setPuntaje(nuevoPuntaje);
+    for (int i = 0; i < heap.size(); i++) {
+        if (heap.get(i).getCedula() == id) {
+            long puntajeAnt = heap.get(i).getPuntaje();
+            if (puntajeAnt == nuevoPuntaje) return; // No hace nada si no cambia
+            heap.get(i).setPuntaje(nuevoPuntaje);
+            if (nuevoPuntaje < puntajeAnt) {
                 heapifyUp(i);
+            } else {
                 heapifyDown(i);
-                break;
             }
+            break;
         }
     }
+}
 
     private void heapifyUp(int index) {
         while (index > 0) {
@@ -100,12 +105,16 @@ public class MinHeap {
             System.out.println(e);
         }
     }
-    
-    public MinHeap clone() {
-        MinHeap clonedHeap = new MinHeap();
-        for (Estudiante estudiante : this.heap) {
-            clonedHeap.heap.add(estudiante.clone()); // assumes Estudiante implements clone()
+@Override
+public MinHeap clone() {
+    MinHeap clonedHeap = new MinHeap();
+    for (Estudiante estudiante : this.heap) {
+        try {
+            clonedHeap.heap.add(estudiante.clone());
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Clonación no soportada en Estudiante", e);
         }
-        return clonedHeap;
     }
+    return clonedHeap;
+}
 }
