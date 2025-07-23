@@ -13,8 +13,13 @@ public class View extends javax.swing.JFrame {
     /**
      * Creates new form View
      */
+    HashMap mapEstudiantes;
+    MinHeap heapEstudiantes;
+
     public View() {
         initComponents();
+        mapEstudiantes = new HashMap();
+        heapEstudiantes = new MinHeap();
     }
 
     /**
@@ -26,21 +31,192 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelBusqueda = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        TituloBuscar = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        Titulo = new javax.swing.JLabel();
+        PanelPrioridad = new javax.swing.JPanel();
+        TituloPrioridad = new javax.swing.JLabel();
+        PanelInformacion = new javax.swing.JPanel();
+        TituloInformacion = new javax.swing.JLabel();
+        TextoCedula = new javax.swing.JTextField();
+        TextoNombre = new javax.swing.JTextField();
+        TextoCarrera = new javax.swing.JTextField();
+        TextoPuntaje = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        BotonAgregar = new javax.swing.JButton();
+        BotonEliminar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        PanelBusqueda.setBackground(java.awt.Color.white);
+        PanelBusqueda.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
+        PanelBusqueda.setLayout(new javax.swing.BoxLayout(PanelBusqueda, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel5.setBackground(java.awt.Color.white);
+        jPanel5.setMaximumSize(new java.awt.Dimension(500, 100));
+
+        TituloBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TituloBuscar.setText("Buscar por cédula:");
+        jPanel5.add(TituloBuscar);
+
+        jTextField7.setMaximumSize(new java.awt.Dimension(90, 30));
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jTextField7);
+
+        jButton3.setBackground(java.awt.Color.lightGray);
+        jButton3.setForeground(java.awt.Color.white);
+        jButton3.setText("Asignar");
+        jPanel5.add(jButton3);
+
+        PanelBusqueda.add(jPanel5);
+        PanelBusqueda.add(jPanel6);
+
+        getContentPane().add(PanelBusqueda, java.awt.BorderLayout.CENTER);
+
+        Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo.setText("RESIDENCIAS UNAL");
+        getContentPane().add(Titulo, java.awt.BorderLayout.PAGE_START);
+
+        PanelPrioridad.setBackground(java.awt.Color.white);
+        PanelPrioridad.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        PanelPrioridad.setLayout(new javax.swing.BoxLayout(PanelPrioridad, javax.swing.BoxLayout.Y_AXIS));
+
+        TituloPrioridad.setText("Lista de prioridad");
+        PanelPrioridad.add(TituloPrioridad);
+
+        getContentPane().add(PanelPrioridad, java.awt.BorderLayout.EAST);
+
+        PanelInformacion.setBackground(java.awt.Color.white);
+        PanelInformacion.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        PanelInformacion.setLayout(new javax.swing.BoxLayout(PanelInformacion, javax.swing.BoxLayout.Y_AXIS));
+
+        TituloInformacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        TituloInformacion.setText("Student Info");
+        TituloInformacion.setMaximumSize(new java.awt.Dimension(90, 15));
+        TituloInformacion.setMinimumSize(new java.awt.Dimension(90, 15));
+        TituloInformacion.setPreferredSize(new java.awt.Dimension(90, 15));
+        PanelInformacion.add(TituloInformacion);
+
+        TextoCedula.setText("Cedula");
+        TextoCedula.setMaximumSize(new java.awt.Dimension(90, 30));
+        TextoCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoCedulaActionPerformed(evt);
+            }
+        });
+        PanelInformacion.add(TextoCedula);
+
+        TextoNombre.setText("Nombre");
+        TextoNombre.setMaximumSize(new java.awt.Dimension(90, 30));
+        TextoNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoNombreActionPerformed(evt);
+            }
+        });
+        PanelInformacion.add(TextoNombre);
+
+        TextoCarrera.setText("Carrera");
+        TextoCarrera.setMaximumSize(new java.awt.Dimension(90, 30));
+        TextoCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoCarreraActionPerformed(evt);
+            }
+        });
+        PanelInformacion.add(TextoCarrera);
+
+        TextoPuntaje.setText("Puntaje");
+        TextoPuntaje.setMaximumSize(new java.awt.Dimension(90, 30));
+        TextoPuntaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoPuntajeActionPerformed(evt);
+            }
+        });
+        PanelInformacion.add(TextoPuntaje);
+
+        jPanel4.setBackground(java.awt.Color.white);
+        jPanel4.setMaximumSize(new java.awt.Dimension(500, 100));
+
+        BotonAgregar.setBackground(java.awt.Color.blue);
+        BotonAgregar.setForeground(java.awt.Color.white);
+        BotonAgregar.setText("Agregar");
+        BotonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAgregarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BotonAgregar);
+
+        BotonEliminar.setBackground(java.awt.Color.red);
+        BotonEliminar.setForeground(java.awt.Color.white);
+        BotonEliminar.setText("Eliminar");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BotonEliminar);
+
+        PanelInformacion.add(jPanel4);
+
+        getContentPane().add(PanelInformacion, java.awt.BorderLayout.WEST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TextoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoNombreActionPerformed
+
+    private void TextoCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoCarreraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoCarreraActionPerformed
+
+    private void TextoPuntajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoPuntajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoPuntajeActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
+        // TODO add your handling code here:
+        String Cedula = TextoCedula.getText();
+        String Nombre = TextoNombre.getText();
+        String Carrera = TextoCarrera.getText();
+        Long Puntaje = Long.valueOf(TextoPuntaje.getText());
+
+        //comprobar que no este ya agregado
+        if (mapEstudiantes.containsKey(Cedula)) {
+            Estudiante estudianteAgregado = new Estudiante(Integer.parseInt(Cedula), Nombre, Carrera, Puntaje);
+            mapEstudiantes.put(Cedula, estudianteAgregado);
+            heapEstudiantes.insert(estudianteAgregado);
+        } else {
+            //Ventana de error
+        }
+    }//GEN-LAST:event_BotonAgregarActionPerformed
+
+    private void TextoCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoCedulaActionPerformed
+
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        String Cedula = TextoCedula.getText();
+
+        if (mapEstudiantes.containsKey(Cedula)) {
+            mapEstudiantes.remove(Cedula);
+        } else {
+            //Ventana de error.
+        }
+    }//GEN-LAST:event_BotonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +254,23 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAgregar;
+    private javax.swing.JButton BotonEliminar;
+    private javax.swing.JPanel PanelBusqueda;
+    private javax.swing.JPanel PanelInformacion;
+    private javax.swing.JPanel PanelPrioridad;
+    public javax.swing.JTextField TextoCarrera;
+    public javax.swing.JTextField TextoCedula;
+    public javax.swing.JTextField TextoNombre;
+    public javax.swing.JTextField TextoPuntaje;
+    private javax.swing.JLabel Titulo;
+    private javax.swing.JLabel TituloBuscar;
+    private javax.swing.JLabel TituloInformacion;
+    private javax.swing.JLabel TituloPrioridad;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    public javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }
