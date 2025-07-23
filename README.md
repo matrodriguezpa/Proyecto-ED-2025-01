@@ -78,17 +78,29 @@ Panel reutilizable que representa visualmente a un estudiante, mostrando:
 ## 📁 Estructura del Repositorio
 
 ├── src/
+
 │ ├── Estudiante.java
+
 │ ├── HashMap.java
+
 │ ├── LinkedList.java
+
 │ ├── MinHeap.Java
+
 │ ├── View.java
+
 │ ├── View.form
+
 │ ├── PanelEstudiante.java
+
 │ ├── PanelEstudiante.form
+
 │ └── ResidenciasUnal.java
+
 ├── README.md
+
 ├── .gitignore
+
 └── pom.xml
 
 ---
