@@ -1,6 +1,6 @@
 package com.residenciasunal.residenciasunal;
 
-public class Estudiante {
+public class Estudiante implements Cloneable{
 
     private int cedula;
     private String nombre;
