@@ -66,4 +66,8 @@ public class Estudiante {
                 + ", puntaje=" + puntaje
                 + '}';
     }
+     @Override
+    public Estudiante clone() {
+        return new Estudiante(this.cedula, this.nombre, this.carrera, this.puntaje);
+    }
 }
