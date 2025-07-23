@@ -46,10 +46,15 @@ public class Estudiante {
 
 
     public void setNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede ser nulo o vacío.");
+        }
         this.nombre = nombre;
     }
-
     public void setCarrera(String carrera) {
+        if (carrera == null || carrera.trim().isEmpty()) {
+            throw new IllegalArgumentException("La carrera no puede ser nula o vacía.");
+        }
         this.carrera = carrera;
     }
 
@@ -74,7 +79,9 @@ public class Estudiante {
                 + '}';
     }
      @Override
-    public Estudiante clone() {
-        return new Estudiante(this.cedula, this.nombre, this.carrera, this.puntaje);
+    public Estudiante clone() throws CloneNotSupportedException {
+        Estudiante clon = (Estudiante) super.clone();
+        clon.asignado = this.asignado; // Copia también el campo asignado
+        return clon;
     }
 }
